@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "what-is-an-ai-chatbot-trained-on-your-website",
+    "title": "What is an AI chatbot trained on your own website?",
+    "excerpt": "Not all chatbots are the same. Here's the difference between a generic AI assistant and one that actually knows your business.",
+    "date": "2026-06-01",
+    "readTime": "4 min read",
+    "category": "Basics",
+    "content": [
+      "Most people's first experience with an AI chatbot is a generic assistant — one trained on the entire internet, able to talk about almost anything, but not particularly useful for answering questions about your specific business.",
+      "A chatbot trained on your own website works differently. Instead of drawing on general knowledge, it only answers using the content you actually give it — your website pages, your PDFs, your FAQs, your product documentation. Ask it something outside that scope, and a well-built version will say so, rather than guessing.",
+      "This distinction matters most in customer-facing situations. A visitor asking about your return policy needs your return policy, not a plausible-sounding guess. A patient asking about office hours needs your actual hours. The value isn't in the AI being clever — it's in the AI being accurate.",
+      "For most businesses, getting one of these running doesn't require any technical work. You point it at your website or upload a handful of documents, and within minutes it can hold a reasonably competent conversation about your business — because it's reading your business's own words back to your customers, not inventing new ones."
+    ]
+  },
+  {
+    "slug": "signs-your-support-team-needs-an-ai-chatbot",
+    "title": "5 signs your support team could use an AI chatbot",
+    "excerpt": "If any of these sound familiar, a trained chatbot might save your team more hours than you'd expect.",
+    "date": "2026-06-15",
+    "readTime": "5 min read",
+    "category": "Support",
+    "content": [
+      "1. Your team answers the same handful of questions, over and over. Shipping times, business hours, pricing tiers, return windows — if a small set of questions makes up the bulk of your ticket volume, that's exactly the kind of repetitive load a trained chatbot is built to absorb.",
+      "2. Customers wait hours (or days) for a reply outside business hours. A chatbot doesn't take weekends off. It won't replace a human for anything nuanced, but it can answer the routine question the moment it's asked, at 11pm on a Sunday.",
+      "3. Your documentation exists, but nobody reads it. Help centers and FAQ pages are only useful if people find the right page. A chatbot trained on that same documentation can surface the exact answer instead of making a visitor search for it.",
+      "4. Support volume spikes are unpredictable. A product launch, a sale, or a seasonal rush can flood a small team overnight. A chatbot absorbs the surge in routine questions so your team can focus on the ones that actually need a person.",
+      "5. You're considering a new hire mostly to handle overflow. Before adding headcount purely to keep up with volume, it's worth checking how much of that volume is actually repetitive — because that's the part a chatbot can take off the list entirely."
+    ]
+  },
+  {
+    "slug": "chatbot-vs-hiring-more-support-staff",
+    "title": "AI chatbot or another support hire? How to think about it",
+    "excerpt": "It's rarely all-or-nothing. Here's a framework for deciding what to automate and what still needs a person.",
+    "date": "2026-07-01",
+    "readTime": "6 min read",
+    "category": "Strategy",
+    "content": [
+      "The question usually isn't 'chatbot or human' — it's which parts of your support volume actually need a human judgment call, and which parts are just retrieval: finding the right fact and stating it clearly.",
+      "A useful exercise is to pull a week of support tickets and sort them into two piles. Pile one: questions with a single correct, factual answer that already exists somewhere in your documentation, policies, or product pages. Pile two: everything that requires judgment, empathy, troubleshooting, or a decision only a person should make.",
+      "For most businesses, pile one is bigger than expected — often well over half of total volume. That's the pile a trained chatbot handles well, immediately, without hiring, training, or scheduling.",
+      "Pile two is where a person still matters, and probably always will. The goal of adding a chatbot isn't to remove your team from the equation — it's to stop spending their time on pile one, so more of their day goes to pile two, where their judgment is actually the point.",
+      "In practice, this usually means a chatbot doesn't replace a planned hire so much as it changes what that hire spends their time doing — less repetition, more of the work that actually needed a person in the first place."
+    ]
+  }
+]
