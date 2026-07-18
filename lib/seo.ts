@@ -4,6 +4,9 @@ export interface FaqSchemaItem {
 }
 
 export function faqPageJsonLd(items: FaqSchemaItem[]) {
+  if (!Array.isArray(items)) {
+    return { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [] };
+  }
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
