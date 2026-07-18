@@ -52,9 +52,9 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       ref={sectionRef}
-      className="relative py-24 lg:py-32 bg-[oklch(0.09_0.01_260)] text-white overflow-hidden"
+      className="relative py-6 lg:py-32 bg-[oklch(0.09_0.01_260)] text-white overflow-hidden"
     >
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-white/[0.02] blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] lg:w-[400px] lg:h-[400px] rounded-full bg-white/[0.02] blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header — titre + image cerisier */}
@@ -78,7 +78,7 @@ export function HowItWorksSection() {
           </div>
 
           {/* Image cerisier — se colle en bas sur les blocs */}
-          <div className={`relative h-[320px] lg:h-[640px] overflow-hidden transition-all duration-1000 delay-200 ${
+          <div className={`relative h-[28vh] max-h-[320px] lg:h-[640px] overflow-hidden transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}>
             <img
