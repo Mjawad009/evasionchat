@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { BookDemoClient, bookDemoFaqs } from "./book-demo-client";
+import { BookDemoClient } from "./book-demo-client";
+import { bookDemoFaqs } from "./book-demo-faqs";
 import { faqPageJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
