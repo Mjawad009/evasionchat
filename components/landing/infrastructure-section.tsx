@@ -168,7 +168,9 @@ export function InfrastructureSection() {
             <div className={`p-8 border border-foreground/10 bg-foreground/[0.02] transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}>
-              <span className="text-5xl lg:text-6xl font-display"><300ms</span>
+              <span className="text-5xl lg:text-6xl font-display">
+                {"<"}300ms
+              </span>
               <span className="block text-sm text-muted-foreground mt-2">Instant, every time</span>
             </div>
           </div>
