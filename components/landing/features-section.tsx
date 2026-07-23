@@ -16,12 +16,7 @@ const features = [
     description: "While your team sleeps, your chatbot is still closing deals and answering questions — in every time zone your customers live in.",
     stats: { value: "24/7", label: "availability" },
   },
-  {
-    number: "03",
-    title: "Built for agencies and multi-brand teams",
-    description: "Run a separate AI assistant for every client or storefront — all managed, monitored, and billed from one place.",
-    stats: { value: "Multi-tenant", label: "by design" },
-  },
+
   {
     number: "04",
     title: "Enterprise-grade privacy, by default",
@@ -178,16 +173,16 @@ export function FeaturesSection({ showHeader = true }: { showHeader?: boolean })
             <div className="lg:col-span-7">
               <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
                 <span className="w-12 h-px bg-foreground/30" />
-                Built to work like your best employee
+                Built to work more than your best employee
               </span>
               <h2
                 className={`text-6xl md:text-7xl lg:text-[128px] font-display tracking-tight leading-[0.9] transition-all duration-1000 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
               >
-                An assistant that
+                An AI that already
                 <br />
-                <span className="text-muted-foreground">already knows your business.</span>
+                <span className="text-muted-foreground">knows your business.</span>
               </h2>
             </div>
             <div className="lg:col-span-5 lg:pb-4">
