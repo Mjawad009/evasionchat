@@ -5,8 +5,8 @@ import { useEffect, useState, useRef } from "react";
 const regions = [
   { name: "North America", status: "live" },
   { name: "Europe", status: "live" },
-  { name: "Asia Pacific", status: "live" },
-  { name: "South America", status: "live" },
+  { name: "South Asia", status: "live" },
+  { name: "East Asia", status: "live" },
 ];
 
 export function InfrastructureSection() {
@@ -67,9 +67,9 @@ export function InfrastructureSection() {
               <h2 className={`text-6xl md:text-7xl lg:text-[128px] font-display tracking-tight leading-[0.9] transition-all duration-1000 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}>
-                Your AI,
+                Your AI Chatbot,
                 <br />
-                <span className="text-muted-foreground">always awake.</span>
+                <span className="text-muted-foreground">always working.</span>
               </h2>
 
               <p className={`mt-8 text-xl text-muted-foreground leading-relaxed max-w-lg transition-all duration-1000 delay-100 ${
@@ -147,8 +147,8 @@ export function InfrastructureSection() {
             
             <div className="relative z-10">
               <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-8xl lg:text-[10rem] font-display leading-none">9</span>
-                <span className="text-2xl text-muted-foreground">covered</span>
+                <span className="text-3xl text-muted-foreground">All</span>
+                <span className="text-7xl lg:text-[10rem] font-display leading-none">World</span>
               </div>
               <p className="text-muted-foreground max-w-md">
                 Wherever your customers are, your AI is already there to greet them.
