@@ -18,7 +18,7 @@ const features = [
   },
 
   {
-    number: "04",
+    number: "03",
     title: "Enterprise-grade privacy, by default",
     description: "Your knowledge base, your conversations, your customer data — isolated, encrypted, and never used to train anyone else's AI.",
     stats: { value: "0", label: "data incidents to date" },
@@ -203,22 +203,34 @@ export function FeaturesSection({ showHeader = true }: { showHeader?: boolean })
             className={`lg:col-span-12 relative bg-black border border-foreground/10 min-h-[500px] overflow-hidden group transition-all duration-700 flex ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
             }`}
-            onMouseEnter={() => setActiveFeature(0)}
           >
             {/* Left: text content */}
             <div className="relative flex-1 p-8 lg:p-12 bg-black">
               <ParticleVisualization />
               <div className="relative z-10">
-                <span className="font-mono text-sm text-muted-foreground">{features[0].number}</span>
+                <span className="font-mono text-sm text-muted-foreground">{features[activeFeature].number}</span>
                 <h3 className="text-3xl lg:text-4xl font-display mt-4 mb-6 group-hover:translate-x-2 transition-transform duration-500">
-                  {features[0].title}
+                  {features[activeFeature].title}
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed max-w-md mb-8">
-                  {features[0].description}
+                  {features[activeFeature].description}
                 </p>
+                <div className="flex gap-3 mb-10">
+                  {features.map((feature, index) => (
+                    <button
+                      key={feature.number}
+                      onClick={() => setActiveFeature(index)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        activeFeature === index
+                          ? "w-12 bg-white"
+                          : "w-6 bg-white/20 hover:bg-white/40"
+                      }`}
+                    />
+                  ))}
+                </div>
                 <div>
-                  <span className="text-5xl lg:text-6xl font-display">{features[0].stats.value}</span>
-                  <span className="block text-sm text-muted-foreground font-mono mt-2">{features[0].stats.label}</span>
+                  <span className="text-5xl lg:text-6xl font-display">{features[activeFeature].stats.value}</span>
+                  <span className="block text-sm text-muted-foreground font-mono mt-2">{features[activeFeature].stats.value}</span>
                 </div>
               </div>
             </div>
