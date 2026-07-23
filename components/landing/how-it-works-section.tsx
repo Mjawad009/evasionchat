@@ -5,20 +5,20 @@ import { useEffect, useRef, useState } from "react";
 const steps = [
   {
     number: "01",
-    title: "Connect",
+    title: "Book a demo",
     subtitle: "your business",
-    description: "Point it at your website or upload your documents — PDFs, Word files, spreadsheets, FAQs. That's it.",
+    description: "Every implementation should starts with understanding your business.",
   },
   {
     number: "02",
-    title: "Train",
-    subtitle: "it in minutes",
-    description: "It reads every document and page you give it, then learns to answer exactly the way your team would.",
+    title: "We Customize",
+    subtitle: "for your needs",
+    description: "We configure, train, and fine-tune your AI specifically for your business.",
   },
   {
     number: "03",
-    title: "Go live",
-    subtitle: "and start saving hours",
+    title: "Launch",
+    subtitle: "and start seeing results",
     description: "Add it to your site in minutes. Watch conversations come in, see what customers ask most, and free up your team's time.",
   },
 ];
