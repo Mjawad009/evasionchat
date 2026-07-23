@@ -30,19 +30,31 @@ export function SocialProofSection() {
         <p className={`text-center text-sm font-mono text-muted-foreground mb-8 transition-all duration-700 ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}>
-          Built for businesses across e-commerce, healthcare, education, and professional services
+          Especially Built for Consultants and Survey Companies like Yours 
         </p>
-
-        <div className={`flex flex-wrap items-center justify-center gap-x-12 gap-y-6 transition-all duration-700 delay-100 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}>
-          {logoSlots.map((_, i) => (
-            // TODO: swap this placeholder block for <img src="/logos/company-x.svg" alt="Company X" className="h-6 w-auto opacity-50 hover:opacity-100 transition-opacity" />
-            <div
-              key={i}
-              className="h-6 w-28 rounded bg-foreground/10"
-              aria-hidden="true"
-            />
+        const companies = [
+          { name: "Microsoft", url: "https://www.microsoft.com" },
+          { name: "Stripe", url: "https://stripe.com" },
+          { name: "Shopify", url: "https://www.shopify.com" },
+          { name: "Notion", url: "https://www.notion.so" },
+          { name: "HubSpot", url: "https://www.hubspot.com" },
+          { name: "Slack", url: "https://slack.com" },
+        ];
+        <div
+          className={`flex flex-wrap items-center justify-center gap-x-12 gap-y-6 transition-all duration-700 delay-100 ${
+            isVisible ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {companies.map((company) => (
+            <a
+              key={company.name}
+              href={company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-foreground/50 hover:text-foreground transition-colors"
+            >
+              {company.name}
+            </a>
           ))}
         </div>
       </div>
