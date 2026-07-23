@@ -206,9 +206,9 @@ export function HeroSection() {
       >
         <div className="max-w-[1400px] mx-auto flex flex-wrap items-start gap-x-8 gap-y-6 lg:gap-20">
           {[
-            { value: "1,200+", label: "already live on the platform" },
-            { value: "99.98%", label: "always awake, always answering" },
-            { value: "<300ms", label: "faster than your fastest rep" },
+            { value: "200+", label: "Business trusts Us" },
+            { value: "300,000+", label: "Conversations Answered" },
+            { value: "99.99%", label: "Satisfaction Rate" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col gap-2 min-w-[120px]">
               <span className="text-3xl lg:text-4xl font-display text-white">{stat.value}</span>
