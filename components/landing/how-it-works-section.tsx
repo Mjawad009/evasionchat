@@ -11,7 +11,7 @@ const steps = [
   },
   {
     number: "02",
-    title: "We Customize",
+    title: "Customize",
     subtitle: "for your needs",
     description: "We configure, train, and fine-tune your AI specifically for your business.",
   },
@@ -19,7 +19,7 @@ const steps = [
     number: "03",
     title: "Launch",
     subtitle: "and start seeing results",
-    description: "Add it to your site in minutes. Watch conversations come in, see what customers ask most, and free up your team's time.",
+    description: "Watch conversations come in, see what customers ask most, and free up your team's time.",
   },
 ];
 
@@ -71,9 +71,9 @@ export function HowItWorksSection() {
             <h2 className={`text-6xl md:text-7xl lg:text-[128px] font-display tracking-tight leading-[0.85] transition-all duration-1000 delay-100 ${
               isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
             }`}>
-              <span className="block">Connect.</span>
-              <span className="block text-white/30">Train.</span>
-              <span className="block text-white/10">Go live.</span>
+              <span className="block">Discover.</span>
+              <span className="block text-white/30">Customize.</span>
+              <span className="block text-white/10">Launch.</span>
             </h2>
           </div>
 
