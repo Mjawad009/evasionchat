@@ -146,9 +146,9 @@ export function IntegrationsSection({ showHeader = true }: { showHeader?: boolea
         }`}>
           <div className="flex flex-wrap gap-12">
             {[
-              { value: "500+", label: "Tools you already use" },
-              { value: "One click", label: "Secure login" },
-              { value: "Instant", label: "Always up to date" },
+              { value: "500+", label: "Tools you can already use" },
+              { value: "Top Notch Security", label: "Data is always protected" },
+              { value: "Best Tools", label: "Always up to date" },
             ].map((stat) => (
               <div key={stat.label} className="flex items-baseline gap-3">
                 <span className="text-3xl font-display">{stat.value}</span>
