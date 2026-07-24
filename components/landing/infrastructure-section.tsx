@@ -147,8 +147,8 @@ export function InfrastructureSection() {
             
             <div className="relative z-10">
               <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-3xl text-muted-foreground">All</span>
-                <span className="text-7xl lg:text-[10rem] font-display leading-none">World</span>
+                <span className="text-4xl text-muted-foreground">Whole</span>
+                <span className="text-8xl lg:text-[10rem] font-display leading-none">World</span>
               </div>
               <p className="text-muted-foreground max-w-md">
                 Wherever your customers are, your AI is already there to greet them.
