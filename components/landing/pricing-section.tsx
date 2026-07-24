@@ -7,11 +7,11 @@ const plans = [
   {
     name: "Free",
     description: "Perfect for trying it out, no card required",
-    price: { monthly: null, annual: null },
+    price: { monthly: 0, annual: 0 },
     features: [
       "1 AI chatbot",
-      "500 conversations/month",
-      "Community support",
+      "20 conversations/month",
+      "No support",
       "Basic conversation history",
       "Standard integrations",
     ],
@@ -31,7 +31,7 @@ const plans = [
       "Team workspaces",
       "Custom chatbot personality & tone",
     ],
-    cta: "Start free trial",
+    cta: "Talk to sales",
     highlight: true,
   },
   {
