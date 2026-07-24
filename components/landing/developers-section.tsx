@@ -73,9 +73,9 @@ export function DevelopersSection() {
             Simple enough for anyone. Powerful enough for developers.
           </span>
           <h2 className="text-6xl md:text-7xl lg:text-[128px] font-display tracking-tight leading-[0.9]">
-            Set it up in minutes.
+            Set it up by our developers.
             <br />
-            <span className="text-muted-foreground">Or customize everything.</span>
+            <span className="text-muted-foreground">and customize anything.</span>
           </h2>
         </div>
 
