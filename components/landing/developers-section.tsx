@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 
 const features = [
   { 
-    title: "No-code setup", 
-    description: "Anyone on your team can set this up — no developer needed."
+    title: "No Developer required", 
+    description: "We do all the headache — no worry needed."
   },
   { 
     title: "Live conversation view", 
@@ -13,7 +13,7 @@ const features = [
   },
   { 
     title: "Flexible AI options", 
-    description: "We choose the best AI for the job — or bring your own."
+    description: "We choose the best AI for the job."
   },
   { 
     title: "Test before you launch", 
