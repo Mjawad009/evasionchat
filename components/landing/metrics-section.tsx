@@ -6,18 +6,18 @@ import { useEffect, useState, useRef } from "react";
 // animation. Wire them up to real analytics before publishing.
 const metrics = [
   { 
-    value: 1284, 
+    value: 2684, 
     suffix: "", 
     prefix: "",
     label: "Questions answered today",
     sublabel: "without a single human needed",
   },
   { 
-    value: 99, 
-    suffix: ".9%", 
+    value: 20, 
+    suffix: "%", 
     prefix: "",
-    label: "Availability",
-    sublabel: "never closed, never offline",
+    label: "Average Leads",
+    sublabel: "never lose leads even at night",
   },
   { 
     value: 2, 
