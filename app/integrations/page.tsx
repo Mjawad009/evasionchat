@@ -23,9 +23,9 @@ export default function IntegrationsPage() {
         eyebrow="Integrations"
         title={
           <>
-            Fits right into
+            We optimize the way
             <br />
-            <span className="text-muted-foreground">how you already work.</span>
+            <span className="text-muted-foreground">you already work / want.</span>
           </>
         }
         subheading="Train it on your website and documents, connect it to the tools you already run your business on, and it goes to work — no extra software to learn."
