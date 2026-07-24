@@ -7,7 +7,7 @@ const plans = [
   {
     name: "Free",
     description: "Perfect for trying it out, no card required",
-    price: { monthly: 0, annual: 0 },
+    price: { monthly: null, annual: null },
     features: [
       "1 AI chatbot",
       "500 conversations/month",
@@ -21,7 +21,7 @@ const plans = [
   {
     name: "Business",
     description: "For businesses ready to put AI to work every day",
-    price: { monthly: 79, annual: 65 },
+    price: { monthly: null, annual: null },
     features: [
       "Up to 25 AI chatbots",
       "5,000 conversations/month",
