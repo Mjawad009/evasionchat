@@ -208,7 +208,7 @@ export function HeroSection() {
           {[
             { value: "200+", label: "Business trusts Us" },
             { value: "300,000+", label: "Conversations Answered" },
-            { value: "99.99%", label: "Satisfaction Rate" },
+            { value: "80%", label: "Routine Questions Automated" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col gap-2 min-w-[120px]">
               <span className="text-3xl lg:text-4xl font-display text-white">{stat.value}</span>
