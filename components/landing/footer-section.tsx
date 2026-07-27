@@ -135,7 +135,7 @@ export function FooterSection() {
             <div className="col-span-2">
               <a href="/" className="inline-flex items-center gap-2 mb-6">
                 <span className="text-2xl font-display text-white">EVASION CHAT</span>
-                <span className="text-xs text-white/40 font-mono">TM</span>
+                <span className="text-xs text-white/40 font-mono">by PinkTreeE</span>
               </a>
 
               <p className="text-white/50 leading-relaxed mb-8 max-w-xs text-sm">
