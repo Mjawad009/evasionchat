@@ -32,9 +32,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { name: "Twitter", href: "#" },
-  { name: "GitHub", href: "#" },
-  { name: "LinkedIn", href: "#" },
+  { name: "Email Us", href: "mailto:contac@pinktreee.com" },
+  { name: "", href: "#" },
+  { name: "", href: "#" },
 ];
 
 function AnimatedWaveCanvas() {
