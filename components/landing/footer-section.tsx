@@ -19,7 +19,7 @@ const footerLinks = {
     { name: "Roadmap", href: "/roadmap" },
   ],
   Company: [
-    { name: "Pink Tree (Parent Co.)", href: "https://pinktree.co" },
+    { name: "Pink Tree (Parent Co.)", href: "https://pinktreee.com" },
     { name: "Blog", href: "/blog" },
     { name: "Book a Demo", href: "/book-demo" },
     { name: "Sign In", href: "/sign-in" },
