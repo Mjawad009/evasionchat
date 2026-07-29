@@ -6,8 +6,6 @@ import { BlogList } from "@/components/landing/blog-list";
 import { NewsletterSignup } from "@/components/landing/newsletter-signup";
 import { getAllPosts } from "@/lib/blog-store";
 
-// Posts can be added via /admin/blog at any time, so this page reads
-// from disk on every request rather than being statically generated.
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
@@ -15,8 +13,8 @@ export const metadata: Metadata = {
   description: "Practical thinking on AI chatbots, customer support, and where automation actually helps a business.",
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export default async function BlogPage() {
+  const posts = await getAllPosts();
 
   return (
     <main className="relative min-h-screen overflow-x-hidden">
