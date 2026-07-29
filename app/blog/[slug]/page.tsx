@@ -6,14 +6,11 @@ import { FooterSection } from "@/components/landing/footer-section";
 import { CtaSection } from "@/components/landing/cta-section";
 import { getAllPosts, getPostBySlug } from "@/lib/blog-store";
 
-// New posts can be added via /admin/blog at any time, so post pages are
-// rendered dynamically per request rather than statically generated —
-// this way a freshly-published post is live immediately, no rebuild needed.
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return {};
   return {
     title: `${post.title} — The Evasion Chat Blog`,
@@ -23,10 +20,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = getAllPosts()
+  const allPosts = await getAllPosts();
+  const related = allPosts
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 2);
 
@@ -37,6 +35,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     description: post.excerpt,
     datePublished: post.date,
     articleSection: post.category,
+    ...(post.image ? { image: post.image } : {}),
   };
 
   return (
@@ -63,20 +62,55 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <span>{post.readTime}</span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-display tracking-tight leading-[1.05] mb-12">
+          <h1 className="text-4xl md:text-5xl font-display tracking-tight leading-[1.05] mb-8">
             {post.title}
           </h1>
 
-          <div className="space-y-6">
-            {post.content.map((paragraph, i) => (
-              <p key={i} className="text-lg text-muted-foreground leading-relaxed">
-                {paragraph}
-              </p>
+          {post.image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={post.image}
+              alt={post.imageAlt || post.title}
+              className="w-full rounded-2xl mb-10 aspect-[1200/630] object-cover"
+            />
+          )}
+
+          {post.quickAnswer && (
+            <p className="text-lg font-medium leading-relaxed border-l-2 border-foreground/20 pl-6 mb-12">
+              {post.quickAnswer}
+            </p>
+          )}
+
+          <div className="space-y-10">
+            {post.content.map((section, i) => (
+              <div key={i}>
+                <h2 className="text-xl font-display mb-4">{section.heading}</h2>
+                <div className="space-y-5">
+                  {section.body.map((paragraph, j) => (
+                    <p key={j} className="text-lg text-muted-foreground leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
 
+          {post.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-foreground/10">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 rounded-full text-xs font-mono border border-foreground/15 text-muted-foreground"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
           {related.length > 0 && (
-            <div className="mt-20 pt-12 border-t border-foreground/10">
+            <div className="mt-16 pt-12 border-t border-foreground/10">
               <h2 className="text-sm font-mono text-muted-foreground mb-6">More on {post.category}</h2>
               <div className="space-y-6">
                 {related.map((r) => (
