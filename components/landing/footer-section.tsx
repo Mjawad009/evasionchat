@@ -65,7 +65,7 @@ export function FooterSection() {
 
               <div className="flex gap-6 mb-6">
                 {socialLinks.map((link) => (
-                  
+                  <a
                     key={link.name}
                     href={link.href}
                     className="text-sm text-white/40 hover:text-white transition-colors flex items-center gap-1 group"
@@ -77,7 +77,7 @@ export function FooterSection() {
               </div>
 
               {/* Quiet primary action — same restrained treatment as Pink Tree's footer */}
-              
+              <a
                 href="/book-demo"
                 className="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full text-sm font-medium tracking-wide bg-white text-black hover:bg-pink-300 transition-colors duration-200 max-w-xs"
               >
@@ -93,7 +93,7 @@ export function FooterSection() {
                 <ul className="space-y-4">
                   {links.map((link) => (
                     <li key={link.name}>
-                      
+                      <a
                         href={link.href}
                         className="text-sm text-white/40 hover:text-white transition-colors inline-flex items-center gap-2"
                       >
