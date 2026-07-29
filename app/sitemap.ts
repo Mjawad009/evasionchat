@@ -7,7 +7,7 @@ import { getAllPosts } from "@/lib/blog-store";
 // TODO: replace with your real production domain once deployed
 const BASE_URL = "https://evasionchat.pinktree.co";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/features",
@@ -45,7 +45,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }));
 
-  const blogRoutes = getAllPosts().map((p) => ({
+  const posts = await getAllPosts();
+  const blogRoutes = posts.map((p) => ({
     url: `${BASE_URL}/blog/${p.slug}`,
     lastModified: new Date(p.date),
   }));
