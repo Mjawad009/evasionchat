@@ -11,7 +11,7 @@ export async function DELETE(
   }
 
   const { slug } = await params;
-  const deleted = deletePost(slug);
+  const deleted = await deletePost(slug);
   if (!deleted) {
     return NextResponse.json({ error: "Post not found" }, { status: 404 });
   }
