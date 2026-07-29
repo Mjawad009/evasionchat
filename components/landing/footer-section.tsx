@@ -1,7 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { ArrowUpRight, Mail } from "lucide-react";
 
 const footerLinks = {
   Product: [
@@ -31,82 +30,7 @@ const footerLinks = {
   ],
 };
 
-const socialLinks = [
-  { name: "Email Us", href: "mailto:contac@pinktreee.com" },
-  { name: "", href: "#" },
-  { name: "", href: "#" },
-];
-
-function AnimatedWaveCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationId: number;
-    let time = 0;
-    const dims = { w: 0, h: 0 };
-
-    const resize = () => {
-      dims.w = canvas.offsetWidth;
-      dims.h = canvas.offsetHeight;
-      canvas.width = dims.w * window.devicePixelRatio;
-      canvas.height = dims.h * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const animate = () => {
-      const { w: width, h: height } = dims;
-      ctx.clearRect(0, 0, width, height);
-
-      ctx.strokeStyle = "rgba(100, 200, 150, 0.3)";
-      ctx.lineWidth = 1;
-
-      for (let wave = 0; wave < 3; wave++) {
-        ctx.beginPath();
-        for (let x = 0; x <= width; x += 5) {
-          const y =
-            height * 0.5 +
-            Math.sin(x * 0.01 + time + wave * 0.5) * 30 +
-            Math.sin(x * 0.02 + time * 1.5 + wave) * 20;
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      }
-
-      time += 0.02;
-      animationId = requestAnimationFrame(animate);
-    };
-
-    // Only animate while the footer is actually in view.
-    const visibilityObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          animate();
-        } else {
-          cancelAnimationFrame(animationId);
-        }
-      },
-      { threshold: 0 }
-    );
-    visibilityObserver.observe(canvas);
-
-    return () => {
-      window.removeEventListener("resize", resize);
-      visibilityObserver.disconnect();
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="w-full h-full" />;
-}
+const socialLinks = [{ name: "Email Us", href: "mailto:contact@pinktreee.com" }];
 
 export function FooterSection() {
   return (
@@ -120,15 +44,12 @@ export function FooterSection() {
           decoding="async"
           className="w-full h-full object-cover object-center"
         />
-        {/* Gradient fade to black at bottom */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
-        {/* Subtle dark vignette on sides */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
       </div>
 
       {/* Footer content — black background, white text */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        {/* Main Footer */}
         <div className="py-16 lg:py-20">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-12 lg:gap-8">
             {/* Brand Column */}
@@ -142,10 +63,9 @@ export function FooterSection() {
                 Your business, always open. AI chatbots trained on your content that answer customers and capture leads 24/7.
               </p>
 
-              {/* Social Links */}
-              <div className="flex gap-6">
+              <div className="flex gap-6 mb-6">
                 {socialLinks.map((link) => (
-                  <a
+                  
                     key={link.name}
                     href={link.href}
                     className="text-sm text-white/40 hover:text-white transition-colors flex items-center gap-1 group"
@@ -155,6 +75,15 @@ export function FooterSection() {
                   </a>
                 ))}
               </div>
+
+              {/* Quiet primary action — same restrained treatment as Pink Tree's footer */}
+              
+                href="/book-demo"
+                className="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full text-sm font-medium tracking-wide bg-white text-black hover:bg-pink-300 transition-colors duration-200 max-w-xs"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Book a demo</span>
+              </a>
             </div>
 
             {/* Link Columns */}
@@ -164,7 +93,7 @@ export function FooterSection() {
                 <ul className="space-y-4">
                   {links.map((link) => (
                     <li key={link.name}>
-                      <a
+                      
                         href={link.href}
                         className="text-sm text-white/40 hover:text-white transition-colors inline-flex items-center gap-2"
                       >
@@ -185,10 +114,7 @@ export function FooterSection() {
 
         {/* Bottom Bar */}
         <div className="py-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-white/30">
-            &copy; 2026 The Evasion Chat. All rights reserved.
-          </p>
-
+          <p className="text-sm text-white/30">&copy; 2026 The Evasion Chat. All rights reserved.</p>
           <div className="flex items-center gap-4 text-sm text-white/30">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#eca8d6]" />
