@@ -1,100 +1,143 @@
-import fs from "fs";
-import path from "path";
+import { neon } from "@neondatabase/serverless";
 
-// TODO (production): This store writes to a JSON file on disk. That's fine
-// for local development or a self-hosted server with a persistent disk, but
-// on serverless platforms (e.g. Vercel) the filesystem is read-only/ephemeral
-// in production, so admin edits won't persist across deploys or instances.
-// Before going to production on serverless, swap this module's internals for
-// a real database (Postgres, Supabase, etc.) or a headless CMS — the
-// exported function signatures below (getAllPosts, getPostBySlug, createPost,
-// updatePost, deletePost) are the only things the rest of the app relies on,
-// so the swap doesn't require touching any page or API route.
+export type BlogSection = {
+  heading: string;
+  body: string[];
+};
 
-export interface BlogPost {
+export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
-  date: string; // ISO date, e.g. "2026-07-01"
+  date: string;
   readTime: string;
   category: string;
-  content: string[]; // one entry per paragraph
-}
+  tags: string[];
+  image?: string;
+  imageAlt?: string;
+  quickAnswer: string;
+  content: BlogSection[];
+};
 
-const DATA_PATH = path.join(process.cwd(), "data", "blog-posts.json");
+export type CreatePostInput = {
+  title: string;
+  excerpt: string;
+  category: string;
+  quickAnswer: string;
+  tags: string[];
+  image?: string;
+  imageAlt?: string;
+  content: BlogSection[];
+};
 
-function readPosts(): BlogPost[] {
-  try {
-    const raw = fs.readFileSync(DATA_PATH, "utf-8");
-    return JSON.parse(raw) as BlogPost[];
-  } catch {
-    return [];
-  }
-}
+const sql = neon(process.env.DATABASE_URL!);
 
-function writePosts(posts: BlogPost[]) {
-  fs.mkdirSync(path.dirname(DATA_PATH), { recursive: true });
-  fs.writeFileSync(DATA_PATH, JSON.stringify(posts, null, 2), "utf-8");
-}
+// Run once in the Neon SQL editor before seeding/using this store:
+//
+// CREATE TABLE IF NOT EXISTS blog_posts (
+//   slug TEXT PRIMARY KEY,
+//   title TEXT NOT NULL,
+//   excerpt TEXT NOT NULL,
+//   date DATE NOT NULL DEFAULT CURRENT_DATE,
+//   read_time TEXT NOT NULL,
+//   category TEXT NOT NULL,
+//   tags TEXT[] NOT NULL DEFAULT '{}',
+//   image TEXT,
+//   image_alt TEXT,
+//   quick_answer TEXT NOT NULL,
+//   content JSONB NOT NULL
+// );
 
 function slugify(title: string): string {
   return title
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
-function estimateReadTime(content: string[]): string {
-  const words = content.join(" ").split(/\s+/).filter(Boolean).length;
-  const minutes = Math.max(1, Math.round(words / 200));
+function calculateReadTime(content: BlogSection[]): string {
+  const wordCount = content.reduce((total, section) => {
+    const headingWords = section.heading.split(/\s+/).filter(Boolean).length;
+    const bodyWords = section.body.reduce(
+      (sum, p) => sum + p.split(/\s+/).filter(Boolean).length,
+      0
+    );
+    return total + headingWords + bodyWords;
+  }, 0);
+  const minutes = Math.max(1, Math.round(wordCount / 200));
   return `${minutes} min read`;
 }
 
-export function getAllPosts(): BlogPost[] {
-  return readPosts().sort((a, b) => (a.date < b.date ? 1 : -1));
-}
-
-export function getPostBySlug(slug: string): BlogPost | undefined {
-  return readPosts().find((p) => p.slug === slug);
-}
-
-export function createPost(input: {
-  title: string;
-  excerpt: string;
-  category: string;
-  content: string[];
-  date?: string;
-}): BlogPost {
-  const posts = readPosts();
-  let slug = slugify(input.title);
-  // Ensure uniqueness if a post with the same slug already exists.
-  let suffix = 2;
-  const baseSlug = slug;
-  while (posts.some((p) => p.slug === slug)) {
-    slug = `${baseSlug}-${suffix}`;
-    suffix += 1;
-  }
-
-  const post: BlogPost = {
-    slug,
-    title: input.title,
-    excerpt: input.excerpt,
-    category: input.category,
-    content: input.content,
-    date: input.date || new Date().toISOString().slice(0, 10),
-    readTime: estimateReadTime(input.content),
+function rowToPost(row: any): BlogPost {
+  return {
+    slug: row.slug,
+    title: row.title,
+    excerpt: row.excerpt,
+    date: row.date instanceof Date ? row.date.toISOString().slice(0, 10) : row.date,
+    readTime: row.read_time,
+    category: row.category,
+    tags: row.tags ?? [],
+    image: row.image ?? undefined,
+    imageAlt: row.image_alt ?? undefined,
+    quickAnswer: row.quick_answer,
+    content: row.content,
   };
-
-  posts.push(post);
-  writePosts(posts);
-  return post;
 }
 
-export function deletePost(slug: string): boolean {
-  const posts = readPosts();
-  const next = posts.filter((p) => p.slug !== slug);
-  if (next.length === posts.length) return false;
-  writePosts(next);
-  return true;
+export async function getAllPosts(): Promise<BlogPost[]> {
+  const rows = await sql`
+    SELECT * FROM blog_posts ORDER BY date DESC
+  `;
+  return rows.map(rowToPost);
+}
+
+export async function getPostBySlug(slug: string): Promise<BlogPost | undefined> {
+  const rows = await sql`
+    SELECT * FROM blog_posts WHERE slug = ${slug} LIMIT 1
+  `;
+  return rows[0] ? rowToPost(rows[0]) : undefined;
+}
+
+async function uniqueSlug(base: string): Promise<string> {
+  const existing = await sql`
+    SELECT slug FROM blog_posts WHERE slug = ${base} OR slug LIKE ${base + "-%"}
+  `;
+  const taken = new Set(existing.map((r: any) => r.slug));
+  if (!taken.has(base)) return base;
+  let i = 2;
+  while (taken.has(`${base}-${i}`)) i++;
+  return `${base}-${i}`;
+}
+
+export async function createPost(input: CreatePostInput): Promise<BlogPost> {
+  const slug = await uniqueSlug(slugify(input.title));
+  const readTime = calculateReadTime(input.content);
+
+  const rows = await sql`
+    INSERT INTO blog_posts (slug, title, excerpt, read_time, category, tags, image, image_alt, quick_answer, content)
+    VALUES (
+      ${slug},
+      ${input.title},
+      ${input.excerpt},
+      ${readTime},
+      ${input.category},
+      ${input.tags},
+      ${input.image ?? null},
+      ${input.imageAlt ?? null},
+      ${input.quickAnswer},
+      ${JSON.stringify(input.content)}
+    )
+    RETURNING *
+  `;
+  return rowToPost(rows[0]);
+}
+
+export async function deletePost(slug: string): Promise<boolean> {
+  const rows = await sql`
+    DELETE FROM blog_posts WHERE slug = ${slug} RETURNING slug
+  `;
+  return rows.length > 0;
 }
