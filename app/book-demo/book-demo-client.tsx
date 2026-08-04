@@ -16,16 +16,40 @@ import { bookDemoFaqs } from "./book-demo-faqs";
 export function BookDemoClient() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // TODO: Wire this up to your real backend / CRM / email service.
-  // e.g. POST to an API route (app/api/contact/route.ts) that forwards
-  // the lead to your CRM (HubSpot, Salesforce) or sends you an email.
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setError(null);
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    setIsSubmitting(false);
-    setSubmitted(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      name: formData.get("name"),
+      company: formData.get("company"),
+      email: formData.get("email"),
+      website: formData.get("website"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/book-demo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error("Submission failed");
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong sending your request. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -119,6 +143,12 @@ export function BookDemoClient() {
                   <p className="text-xs text-muted-foreground font-mono">
                     No credit card. No obligation. Just a straight answer on fit.
                   </p>
+
+                  {error && (
+                    <p className="text-sm text-red-500" role="alert">
+                      {error}
+                    </p>
+                  )}
                 </form>
               )}
             </div>
